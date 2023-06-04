@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useRoutes, BrowserRouter } from 'react-router-dom'
+import { ShoppingCartProvider } from '../../Context'
 import Home from '../Home'
 import MyAccount from '../MyAccount'
 import MyOrder from '../MyOrder'
@@ -21,16 +22,15 @@ const AppRoutes = () => useRoutes([
 
 
 const App = () => {
-
-  const [count, setCount] = useState(0)
-
   return (
-    <BrowserRouter>
-      <NavBar/>
-      <Layout>
-        <AppRoutes/>
-      </Layout>
-    </BrowserRouter>
+    <ShoppingCartProvider>
+      <BrowserRouter>
+        <NavBar />
+        <Layout>
+          <AppRoutes />
+        </Layout>
+      </BrowserRouter>
+    </ShoppingCartProvider>
   )
 }
 
