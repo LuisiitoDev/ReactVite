@@ -1,6 +1,7 @@
 import NavItem from "../NavItem";
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
+import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
 const NavBar = () => {
   const { count } = useContext(ShoppingCartContext);
@@ -57,7 +58,10 @@ const NavBar = () => {
             Sign In
           </NavItem>
         </li>
-        <li>🛒 {count}</li>
+        <li className="flex items-center">
+            <ShoppingCartIcon className="h-6 w-6 text-black"/> 
+            <div>{count}</div>
+        </li>
       </ul>
     </nav>
   );
