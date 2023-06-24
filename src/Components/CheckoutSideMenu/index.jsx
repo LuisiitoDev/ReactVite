@@ -5,9 +5,18 @@ import "./styles.css";
 import OrderCard from "../OrderCard";
 
 const CheckoutSideMenu = () => {
-  const { isCheckoutDetailOpen, closeCheckoutSideMenu, shoppingCart } =
-    useContext(ShoppingCartContext);
-    
+  const {
+    isCheckoutDetailOpen,
+    closeCheckoutSideMenu,
+    shoppingCart,
+    setShoppingCart,
+  } = useContext(ShoppingCartContext);
+
+  const handleDelete = (id) => {
+    const filteredProducts = shoppingCart.filter((p) => p.id != id);
+    setShoppingCart(filteredProducts);
+  };
+
   return (
     <aside
       className={`${
@@ -27,9 +36,11 @@ const CheckoutSideMenu = () => {
         {shoppingCart.map((product) => (
           <OrderCard
             key={product.id}
+            id={product.id}
             title={product.title}
             image={product.images}
             price={product.price}
+            handleDelete={handleDelete}
           />
         ))}
       </div>

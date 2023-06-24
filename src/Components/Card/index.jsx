@@ -15,8 +15,7 @@ const Card = ({ id, category: { name }, images, price, title }) => {
   } = useContext(ShoppingCartContext);
 
   const renderIcon = () => {
-    const isInCart =
-      shoppingCart.some(product => product.id == id);
+    const isInCart = shoppingCart.some((product) => product.id == id);
     if (isInCart) {
       return (
         <div className="absolute top-0 right-0 flex justify-center items-center bg-black w-6 h-6 rounded-full m-2 p-1">
