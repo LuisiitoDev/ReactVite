@@ -10,6 +10,7 @@ import SignIn from '../SignIn'
 import NavBar from '../../Components/NavBar/Index'
 import Layout from '../Layout'
 import './App.css'
+import CheckoutSideMenu from '../../Components/CheckoutSideMenu'
 
 const AppRoutes = () => useRoutes([
   { path: "/", element: <Home /> },
@@ -29,6 +30,7 @@ const App = () => {
         <Layout>
           <AppRoutes />
         </Layout>
+        <CheckoutSideMenu/>
       </BrowserRouter>
     </ShoppingCartProvider>
   )
