@@ -2,9 +2,31 @@ import { useContext } from "react";
 import Card from "../../Components/Card";
 import ProductDetail from "../../Components/ProductDetail";
 import { ShoppingCartContext } from "../../Context";
+import { useParams } from "react-router-dom";
 
 function Home() {
-  var context = useContext(ShoppingCartContext);
+  const context = useContext(ShoppingCartContext);
+  const { category } = useParams();
+
+  const renderView = () => {
+    if (category !== undefined) {
+
+      const filtered = context.items.filter((item) =>
+        item.category.name.toLowerCase().includes(category.toLowerCase())
+      );
+
+      if (filtered.length){
+        return filtered.map((item) => <Card key={item.id} {...item} />);
+      }else{
+        return <div>There are nothing to see :(</div>
+      }
+
+      
+
+    } else {
+      return context.filtereditems?.map((item) => <Card key={item.id} {...item} />);
+    }
+  };
 
   return (
     <div>
@@ -18,8 +40,7 @@ function Home() {
         onChange={(event) => context.setSearchByTitle(event.target.value)}
       />
       <div className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
-        {context.items &&
-          context.filtereditems.map((item) => <Card key={item.id} {...item} />)}
+        {renderView()}
         <ProductDetail />
       </div>
     </div>

@@ -4,7 +4,7 @@ import { ShoppingCartContext } from "../../Context";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
 const NavBar = () => {
-  const { count } = useContext(ShoppingCartContext);
+  const context = useContext(ShoppingCartContext);
 
   const activeStyle = "underline underline-offset-4";
 
@@ -15,28 +15,54 @@ const NavBar = () => {
           <NavItem to="/" children="Shopi" />
         </li>
         <li>
-          <NavItem to="/" children="All" activeStyle={activeStyle} />
+          <NavItem
+            to="/"
+            children="All"
+            activeStyle={activeStyle}
+            onClick={() => context.setSearchByCategory()}
+          />
         </li>
         <li>
-          <NavItem to="/clothes" children="Clothes" activeStyle={activeStyle} />
+          <NavItem
+            to="/clothes"
+            children="Clothes"
+            activeStyle={activeStyle}
+            onClick={() => context.setSearchByCategory("clothes")}
+          />
         </li>
         <li>
-          <NavItem to="/electronics" activeStyle={activeStyle}>
+          <NavItem
+            to="/electronics"
+            activeStyle={activeStyle}
+            onClick={() => context.setSearchByCategory("electronics")}
+          >
             Electronics
           </NavItem>
         </li>
         <li>
-          <NavItem to="/furnitures" activeStyle={activeStyle}>
+          <NavItem
+            to="/furnitures"
+            activeStyle={activeStyle}
+            onClick={() => context.setSearchByCategory("furnitures")}
+          >
             Furnitures
           </NavItem>
         </li>
         <li>
-          <NavItem to="/toys" activeStyle={activeStyle}>
+          <NavItem
+            to="/toys"
+            activeStyle={activeStyle}
+            onClick={() => context.setSearchByCategory("toys")}
+          >
             Toys
           </NavItem>
         </li>
         <li>
-          <NavItem to="/others" activeStyle={activeStyle}>
+          <NavItem
+            to="/others"
+            activeStyle={activeStyle}
+            onClick={() => context.setSearchByCategory("others")}
+          >
             Others
           </NavItem>
         </li>
@@ -59,8 +85,8 @@ const NavBar = () => {
           </NavItem>
         </li>
         <li className="flex items-center">
-            <ShoppingCartIcon className="h-6 w-6 text-black"/> 
-            <div>{count}</div>
+          <ShoppingCartIcon className="h-6 w-6 text-black" />
+          <div>{context.count}</div>
         </li>
       </ul>
     </nav>
