@@ -1,10 +1,11 @@
 import { useContext } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { Link } from "react-router-dom";
 import { ShoppingCartContext } from "../../Context";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import "./styles.css";
 import OrderCard from "../OrderCard";
 import { GetTotalPrice } from "../../Utils";
-
 
 const CheckoutSideMenu = () => {
   const {
@@ -14,6 +15,7 @@ const CheckoutSideMenu = () => {
     setShoppingCart,
     setOrder,
     order,
+    setCount,
   } = useContext(ShoppingCartContext);
 
   const handleDelete = (id) => {
@@ -21,12 +23,13 @@ const CheckoutSideMenu = () => {
     setShoppingCart(filteredProducts);
   };
 
-  const handleCheckout = () =>{
+  const handleCheckout = () => {
     const orderToAdd = {
-      date: new Date(),
+      id: uuidv4(),
+      date: new Date().toDateString(),
       products: shoppingCart,
-      total: shoppingCart.length,
-      totalPrice: GetTotalPrice(shoppingCart)
+      totalProducts: shoppingCart.length,
+      totalPrice: GetTotalPrice(shoppingCart),
     };
     setOrder([...order, orderToAdd]);
     setShoppingCart([]);
@@ -63,11 +66,18 @@ const CheckoutSideMenu = () => {
       <div className="px-6 mb-6">
         <p className="flex justify-between items-center mb-2">
           <span className="font-light">Total</span>
-          <span className="font-medium text-2xl">${GetTotalPrice(shoppingCart)}</span>
+          <span className="font-medium text-2xl">
+            ${GetTotalPrice(shoppingCart)}
+          </span>
         </p>
-        <button
-          className="w-full bg-black py-3 text-white rounded-lg"
-          onClick={() => handleCheckout()}>Checkout</button>
+        <Link to="/my-orders/last">
+          <button
+            className="w-full bg-black py-3 text-white rounded-lg"
+            onClick={() => handleCheckout()}
+          >
+            Checkout
+          </button>
+        </Link>
       </div>
     </aside>
   );
